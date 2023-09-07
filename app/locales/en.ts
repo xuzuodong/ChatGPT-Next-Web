@@ -13,9 +13,10 @@ const en: LocaleType = {
       : "Unauthorized access, please enter access code in [auth](/#/auth) page, or enter your OpenAI API Key.",
   },
   Auth: {
-    Title: "Need Access Code",
-    Tips: "Please enter access code below",
-    Input: "access code",
+    Title: "Please Login",
+    Tips: "Please login to coninue",
+    Input: "login name",
+    Password: "password",
     Confirm: "Confirm",
     Later: "Later",
   },
@@ -130,6 +131,10 @@ const en: LocaleType = {
     Title: "Settings",
     SubTitle: "All Settings",
     Danger: {
+      Logout: {
+        Title: "Log out",
+        SubTitle: "Log out and return to login page",
+      },
       Reset: {
         Title: "Reset All Settings",
         SubTitle: "Reset all setting items to default",

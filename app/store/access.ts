@@ -6,6 +6,9 @@ import { BOT_HELLO } from "./chat";
 import { getClientConfig } from "../config/client";
 
 export interface AccessControlStore {
+  loginName: string;
+  loginPassword: string;
+  loginToken: string;
   accessCode: string;
   token: string;
 
@@ -16,6 +19,10 @@ export interface AccessControlStore {
 
   openaiUrl: string;
 
+  updateLoginName: (_: string) => void;
+  updateLoginPassword: (_: string) => void;
+  updateLoginToken: (_: string) => void;
+  login: () => Promise<any>;
   updateToken: (_: string) => void;
   updateCode: (_: string) => void;
   updateOpenAiUrl: (_: string) => void;
@@ -33,9 +40,12 @@ console.log("[API] default openai url", DEFAULT_OPENAI_URL);
 export const useAccessStore = create<AccessControlStore>()(
   persist(
     (set, get) => ({
+      loginName: "",
+      loginPassword: "",
+      loginToken: "",
       token: "",
       accessCode: "",
-      needCode: true,
+      needCode: true as boolean,
       hideUserApiKey: false,
       hideBalanceQuery: false,
       disableGPT4: false,
@@ -46,6 +56,15 @@ export const useAccessStore = create<AccessControlStore>()(
         get().fetch();
 
         return get().needCode;
+      },
+      updateLoginName(val) {
+        set(() => ({ loginName: val.trim() }));
+      },
+      updateLoginPassword(val) {
+        set(() => ({ loginPassword: val?.trim() }));
+      },
+      updateLoginToken(val) {
+        set(() => ({ loginToken: val?.trim() }));
       },
       updateCode(code: string) {
         set(() => ({ accessCode: code?.trim() }));
@@ -61,8 +80,26 @@ export const useAccessStore = create<AccessControlStore>()(
 
         // has token or has code or disabled access control
         return (
-          !!get().token || !!get().accessCode || !get().enabledAccessControl()
+          !!get().token ||
+          !!get().accessCode ||
+          !get().enabledAccessControl() ||
+          !!get().loginToken
         );
+      },
+      login() {
+        return fetch("/api/login", {
+          method: "post",
+          body: JSON.stringify({
+            name: get().loginName,
+            password: get().loginPassword,
+          }),
+        }).then((res) => {
+          if (res.status === 200) {
+            return res.json();
+          } else {
+            throw new Error("Login failed");
+          }
+        });
       },
       fetch() {
         if (fetchState > 0 || getClientConfig()?.buildMode === "export") return;
@@ -96,6 +133,9 @@ export const useAccessStore = create<AccessControlStore>()(
     {
       name: StoreKey.Access,
       version: 1,
+      partialize: (state) => ({
+        loginToken: state.loginToken,
+      }),
     },
   ),
 );

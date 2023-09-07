@@ -7,7 +7,7 @@ import { useAccessStore } from "../store";
 import Locale from "../locales";
 
 import BotIcon from "../icons/bot.svg";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getClientConfig } from "../config/client";
 
 export function AuthPage() {
@@ -23,6 +23,25 @@ export function AuthPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const [loading, setLoading] = useState(false);
+
+  function handleConfirm() {
+    setLoading(true);
+    access
+      .login()
+      .then((res) => {
+        access.updateLoginToken(res.data.token);
+        navigate(Path.Home);
+      })
+      .catch((err: unknown) => {
+        console.error(err);
+        alert("登录失败");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }
+
   return (
     <div className={styles["auth-page"]}>
       <div className={`no-dark ${styles["auth-logo"]}`}>
@@ -34,21 +53,32 @@ export function AuthPage() {
 
       <input
         className={styles["auth-input"]}
-        type="password"
+        type="text"
         placeholder={Locale.Auth.Input}
-        value={access.accessCode}
+        value={access.loginName}
         onChange={(e) => {
-          access.updateCode(e.currentTarget.value);
+          access.updateLoginName(e.currentTarget.value);
+        }}
+      />
+
+      <input
+        className={styles["auth-password"]}
+        type="password"
+        placeholder={Locale.Auth.Password}
+        value={access.loginPassword}
+        onChange={(e) => {
+          access.updateLoginPassword(e.currentTarget.value);
         }}
       />
 
       <div className={styles["auth-actions"]}>
         <IconButton
+          disabled={loading}
           text={Locale.Auth.Confirm}
           type="primary"
-          onClick={goHome}
+          onClick={handleConfirm}
         />
-        <IconButton text={Locale.Auth.Later} onClick={goHome} />
+        {/* <IconButton text={Locale.Auth.Later} onClick={goHome} /> */}
       </div>
     </div>
   );

@@ -138,6 +138,8 @@ export function getHeaders() {
   // use user's api key first
   if (validString(accessStore.token)) {
     headers.Authorization = makeBearer(accessStore.token);
+  } else if (validString(accessStore.loginToken)) {
+    headers.Authorization = makeBearer(accessStore.loginToken);
   } else if (
     accessStore.enabledAccessControl() &&
     validString(accessStore.accessCode)

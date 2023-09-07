@@ -11,9 +11,10 @@ const cn = {
       : "访问密码不正确或为空，请前往[登录](/#/auth)页输入正确的访问密码，或者在[设置](/#/settings)页填入你自己的 OpenAI API Key。",
   },
   Auth: {
-    Title: "需要密码",
-    Tips: "管理员开启了密码验证，请在下方填入访问码",
-    Input: "在此处填写访问码",
+    Title: "请登录",
+    Tips: "请登录以使用本工具",
+    Input: "在此处填写用户名",
+    Password: "密码",
     Confirm: "确认",
     Later: "稍后再说",
   },
@@ -128,6 +129,10 @@ const cn = {
     SubTitle: "所有设置选项",
 
     Danger: {
+      Logout: {
+        Title: "退出登录",
+        SubTitle: "退出登录并返回登录页",
+      },
       Reset: {
         Title: "重置所有设置",
         SubTitle: "重置所有设置项回默认值",

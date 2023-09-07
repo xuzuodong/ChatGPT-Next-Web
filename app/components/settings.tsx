@@ -206,9 +206,23 @@ function UserPromptModal(props: { onClose?: () => void }) {
 function DangerItems() {
   const chatStore = useChatStore();
   const appConfig = useAppConfig();
+  const access = useAccessStore();
+  const navigate = useNavigate();
 
   return (
     <List>
+      <ListItem
+        title={Locale.Settings.Danger.Logout.Title}
+        subTitle={Locale.Settings.Danger.Logout.SubTitle}
+      >
+        <IconButton
+          text={Locale.Settings.Danger.Logout.Title}
+          onClick={async () => {
+            navigate(Path.Auth);
+          }}
+          type="danger"
+        />
+      </ListItem>
       <ListItem
         title={Locale.Settings.Danger.Reset.Title}
         subTitle={Locale.Settings.Danger.Reset.SubTitle}
@@ -217,6 +231,7 @@ function DangerItems() {
           text={Locale.Settings.Danger.Reset.Action}
           onClick={async () => {
             if (await showConfirm(Locale.Settings.Danger.Reset.Confirm)) {
+              access.updateLoginToken("");
               appConfig.reset();
             }
           }}

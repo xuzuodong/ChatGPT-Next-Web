@@ -14,8 +14,8 @@ function getIP(req: NextRequest) {
   return ip;
 }
 
-function parseApiKey(bearToken: string) {
-  const token = bearToken.trim().replaceAll("Bearer ", "").trim();
+function parseApiKey(payload: string) {
+  const token = payload.trim().replaceAll("Bearer ", "").trim();
   const isOpenAiKey = !token.startsWith(ACCESS_CODE_PREFIX);
 
   return {

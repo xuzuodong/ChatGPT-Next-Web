@@ -22,12 +22,18 @@
 
   .auth-input {
     margin: 3vh 0;
+    margin-bottom: 16px;
+  }
+
+  .auth-password {
+    margin-bottom: 3vh;
   }
 
   .auth-actions {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    min-width: 100px;
 
     button:not(:last-child) {
       margin-bottom: 10px;
