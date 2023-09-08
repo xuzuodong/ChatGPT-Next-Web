@@ -36,6 +36,8 @@ export async function requestOpenai(req: NextRequest) {
   );
 
   const fetchUrl = `${baseUrl}/${openaiPath}`;
+  console.log("[Fetch Url]", fetchUrl);
+
   const fetchOptions: RequestInit = {
     headers: {
       "Content-Type": "application/json",
@@ -79,6 +81,7 @@ export async function requestOpenai(req: NextRequest) {
   }
 
   try {
+    console.log("start fetching...");
     const res = await fetch(fetchUrl, fetchOptions);
 
     // to prevent browser prompt for credentials
