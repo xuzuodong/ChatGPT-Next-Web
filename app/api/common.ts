@@ -95,6 +95,12 @@ export async function requestOpenai(req: NextRequest) {
       statusText: res.statusText,
       headers: newHeaders,
     });
+  } catch (e) {
+    if (e instanceof Error) {
+      console.log(e.message);
+    } else {
+      console.log(e);
+    }
   } finally {
     clearTimeout(timeoutId);
   }
