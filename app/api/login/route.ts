@@ -30,6 +30,7 @@ export async function POST(req: NextRequest) {
     body: JSON.stringify({
       name: reqBody.name,
       password: reqBody.password,
+      lessonCode: reqBody.lessonCode,
     }),
   });
 
