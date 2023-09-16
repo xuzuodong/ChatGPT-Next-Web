@@ -71,6 +71,16 @@ export function AuthPage() {
         }}
       />
 
+      <input
+        type="text"
+        className={styles["auth-lesson-code"]}
+        placeholder="课堂码"
+        value={access.loginLessonCode}
+        onChange={(e) => {
+          access.updateLoginLessonCode(e.currentTarget.value);
+        }}
+      />
+
       <div className={styles["auth-actions"]}>
         <IconButton
           disabled={loading}

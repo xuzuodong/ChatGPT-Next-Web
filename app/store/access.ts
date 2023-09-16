@@ -8,6 +8,7 @@ import { getClientConfig } from "../config/client";
 export interface AccessControlStore {
   loginName: string;
   loginPassword: string;
+  loginLessonCode: string;
   loginToken: string;
   accessCode: string;
   token: string;
@@ -21,6 +22,7 @@ export interface AccessControlStore {
 
   updateLoginName: (_: string) => void;
   updateLoginPassword: (_: string) => void;
+  updateLoginLessonCode: (_: string) => void;
   updateLoginToken: (_: string) => void;
   login: () => Promise<any>;
   updateToken: (_: string) => void;
@@ -43,6 +45,7 @@ export const useAccessStore = create<AccessControlStore>()(
       loginName: "",
       loginPassword: "",
       loginToken: "",
+      loginLessonCode: "" as string,
       token: "",
       accessCode: "",
       needCode: true as boolean,
@@ -62,6 +65,9 @@ export const useAccessStore = create<AccessControlStore>()(
       },
       updateLoginPassword(val) {
         set(() => ({ loginPassword: val?.trim() }));
+      },
+      updateLoginLessonCode(val) {
+        set(() => ({ loginLessonCode: val?.trim() }));
       },
       updateLoginToken(val) {
         set(() => ({ loginToken: val?.trim() }));
@@ -92,6 +98,7 @@ export const useAccessStore = create<AccessControlStore>()(
           body: JSON.stringify({
             name: get().loginName,
             password: get().loginPassword,
+            lessonCode: get().loginLessonCode,
           }),
         }).then((res) => {
           if (res.status === 200) {
