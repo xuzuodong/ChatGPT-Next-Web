@@ -95,6 +95,9 @@ export const useAccessStore = create<AccessControlStore>()(
       login() {
         return fetch("/api/login", {
           method: "post",
+          headers: {
+            ...getHeaders(),
+          },
           body: JSON.stringify({
             name: get().loginName,
             password: get().loginPassword,
