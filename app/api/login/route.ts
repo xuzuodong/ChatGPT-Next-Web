@@ -24,14 +24,18 @@ export async function POST(req: NextRequest) {
   let headers = new Headers();
   headers.append("Content-Type", "application/json");
 
+  const body = JSON.stringify({
+    name: reqBody.name,
+    password: reqBody.password,
+    lessonCode: reqBody.lessonCode,
+  });
+
+  console.log("[Login Request Body]", body);
+
   const res = await fetch(fetchUrl, {
     headers,
     method: "POST",
-    body: JSON.stringify({
-      name: reqBody.name,
-      password: reqBody.password,
-      lessonCode: reqBody.lessonCode,
-    }),
+    body,
   });
 
   // to prevent browser prompt for credentials
