@@ -68,6 +68,10 @@ export const SUMMARIZE_MODEL = "gpt-3.5-turbo";
 
 export const DEFAULT_MODELS = [
   {
+    name: "gpt-4-1106-preview",
+    available: true,
+  },
+  {
     name: "gpt-4",
     available: true,
   },
