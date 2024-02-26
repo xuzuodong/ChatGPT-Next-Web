@@ -464,7 +464,7 @@ export function ChatActions(props: {
         />
       )}
 
-      <ChatAction
+      {/* <ChatAction
         onClick={nextTheme}
         text={Locale.Chat.InputActions.Theme[theme]}
         icon={
@@ -478,21 +478,21 @@ export function ChatActions(props: {
             ) : null}
           </>
         }
-      />
+      /> */}
 
-      <ChatAction
+      {/* <ChatAction
         onClick={props.showPromptHints}
         text={Locale.Chat.InputActions.Prompt}
         icon={<PromptIcon />}
-      />
+      /> */}
 
-      <ChatAction
+      {/* <ChatAction
         onClick={() => {
           navigate(Path.Masks);
         }}
         text={Locale.Chat.InputActions.Masks}
         icon={<MaskIcon />}
-      />
+      /> */}
 
       <ChatAction
         text={Locale.Chat.InputActions.Clear}
@@ -509,7 +509,7 @@ export function ChatActions(props: {
         }}
       />
 
-      <ChatAction
+      {/* <ChatAction
         onClick={() => setShowModelSelector(true)}
         text={currentModel}
         icon={<RobotIcon />}
@@ -532,7 +532,7 @@ export function ChatActions(props: {
             showToast(s[0]);
           }}
         />
-      )}
+      )} */}
     </div>
   );
 }
