@@ -63,7 +63,7 @@ You are ChatGPT, a large language model trained by OpenAI.
 Current model: {{model}}
 Current time: {{time}}`;
 
-export const SUMMARIZE_MODEL = "gpt-3.5-turbo";
+export const SUMMARIZE_MODEL = "gpt-4o-mini";
 
 export const DEFAULT_MODELS = [
   {
